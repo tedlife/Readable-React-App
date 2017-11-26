@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/api-server
+/api-server/node_modules
 
 # testing
 /coverage
