@@ -1,0 +1,135 @@
+/* Layout */
+.ant-layout > .ant-layout-content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.ant-layout-has-sider .ant-layout-sider {
+    background: #fff;
+}
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.logo > a {
+    font-size: 24px;
+    color: #fff;
+}
+
+.header > .ant-menu {
+    line-height: 64px;
+}
+
+.header > .ant-btn {
+    margin: 16px 0;
+}
+
+/* Content */
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+    padding-left: 15px;
+}
+
+.article {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff;
+}
+
+.article-header {
+    overflow: hidden;
+}
+
+.article-content {
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.article-vote {
+    float: left;
+    margin-right: 15px;
+    text-align: center;
+}
+
+.article-vote > button, .article-vote > span {
+    display: block;
+}
+
+.article-vote > span {
+    font-size: 18px;
+}
+
+.article-title {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.article-meta {
+    font-size: 16px;
+}
+
+.article-meta span {
+    padding-right: 10px;
+    color: #999;
+}
+
+/* Add post */
+.addpost {
+    width: 480px;
+    margin: 0 auto;
+}
+/* Footer */
+.ant-layout-footer {
+    text-align: center;
+}
+
+/* Comment */
+.article-comment {
+    margin-top: 30px;
+}
+
+.comment-list {
+    margin: 20px 0;
+}
+
+.comment-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.comment-body {
+    font-size: 14px;
+}
+
+.comment-author {
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.comment-metadata {
+    color: #999;
+    padding-left: 10px;
+}
+
+.comment-content {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.comment-vote button, .comment-vote i{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.comment-vote span {
+    padding: 0 10px;
+}
+
+/* Delete or Edit Manage*/
+.manage {
+    margin-top: 20px;
+}
