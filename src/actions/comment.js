@@ -17,37 +17,56 @@ export function getCommentsInPost(postId) {
   };
 }
 
-export function addComment(comment) {
-  return {
-    type: ADD_COMMENT,
-    comment,
+export function addComment(id, timestamp, body, author, parentId) {
+  const request = ReadableAPI.addComment({
+    id,
+    timestamp,
+    body,
+    author,
+    parentId,
+  });
+  return (dispatch) => {
+    request.then((data) => {
+      dispatch({ type: ADD_COMMENT, payload: data });
+    });
   };
 }
 
-export function getComment(comment) {
+export function getComment(id) {
+  const request = ReadableAPI.getComment(id);
   return {
     type: GET_COMMENT,
-    comment,
+    payload: request,
   };
 }
 
-export function voteComment(comment) {
+export function voteComment(id, option) {
+  ReadableAPI.voteComment(id, option);
   return {
     type: VOTE_COMMENT,
-    comment,
+    id,
+    option,
   };
 }
 
-export function deleteComment(comment) {
+export function deleteComment(id) {
+  ReadableAPI.deleteComment(id);
   return {
     type: DELETE_COMMENT,
-    comment,
+    id,
   };
 }
 
-export function editComment(comment) {
-  return {
-    type: EDIT_COMMENT,
-    comment,
+export function editComment(id, timestamp, body, callback) {
+  const request = ReadableAPI.editComment({
+    id,
+    timestamp,
+    body,
+  });
+  return (dispatch) => {
+    request.then((data) => {
+      dispatch({ type: EDIT_COMMENT, payload: data });
+      callback();
+    });
   };
 }

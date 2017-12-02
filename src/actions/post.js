@@ -35,14 +35,13 @@ export function getPost(postId) {
   };
 }
 
-export function votePost(postId, option, path, index) {
+export function votePost(postId, option, path) {
   ReadableAPI.votePost({ postId, option });
   return {
     type: VOTE_POST,
     postId,
     option,
     path,
-    index,
   };
 }
 

@@ -66,17 +66,14 @@ export const deletePost = id =>
 export const getCommentsInPost = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers }).then(res => res.json());
 
-export const addComment = (commentId, timestamp, body, author, postId) =>
+export const addComment = body =>
   fetch(`${api}/comments`, {
     method: 'POST',
-    headers,
-    body: JSON.stringify({
-      id: `${commentId}`,
-      timestamp: `${timestamp}`,
-      body: `${body}`,
-      author: `${author}`,
-      parentId: `${postId}`,
-    }),
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   }).then(res => res.json());
 
 export const getComment = commentId =>
@@ -85,15 +82,21 @@ export const getComment = commentId =>
 export const voteComment = (commentId, option) =>
   fetch(`${api}/comments/${commentId}`, {
     method: 'POST',
-    headers,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({ option: `${option}` }),
   }).then(res => res.json());
 
-export const editComment = (commentId, timestamp, body) =>
-  fetch(`${api}/comments/${commentId}`, {
+export const editComment = body =>
+  fetch(`${api}/comments/${body.id}`, {
     method: 'PUT',
-    headers,
-    body: JSON.stringify({ timestamp: `${timestamp}`, body: `${body}` }),
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   }).then(res => res.json());
 
 export const deleteComment = commentId =>

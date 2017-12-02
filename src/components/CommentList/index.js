@@ -7,10 +7,12 @@ import CommentItem from '../common/CommentItem';
 @connect((state) => {
   const { comments } = state;
   return {
-    comments: Object.keys(comments).reduce(
-      (accumulator, currentValue) => [...accumulator, comments[currentValue]],
-      [],
-    ),
+    comments: Object.keys(comments).reduce((accumulator, currentValue) => {
+      if (comments[currentValue].deleted) {
+        return [...accumulator];
+      }
+      return [...accumulator, comments[currentValue]];
+    }, []),
   };
 })
 class CommentList extends React.Component {

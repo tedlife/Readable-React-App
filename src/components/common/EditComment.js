@@ -1,32 +1,30 @@
 import React from 'react';
+import { Form, Input, Modal } from 'antd';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { Modal, Form, Input } from 'antd';
 
-import { editPost } from '../../actions';
+import { editComment } from '../../actions';
 
-@connect(null, { editPost })
-class EditPost extends React.Component {
+@connect(null, { editComment })
+class EditComment extends React.Component {
   static propTypes = {
-    editPost: propTypes.func.isRequired,
-    post: propTypes.object.isRequired,
-    visible: propTypes.bool.isRequired,
+    editComment: propTypes.func.isRequired,
     closeModal: propTypes.func.isRequired,
+    comment: propTypes.object.isRequired,
+    visible: propTypes.bool.isRequired,
   };
 
   state = {
-    title: '',
     body: '',
     visible: false,
     confirmLoading: false,
   };
 
   componentWillReceiveProps(nextProps) {
-    const { visible, post } = nextProps;
+    const { visible, comment } = nextProps;
     this.setState({
       visible,
-      title: post.title,
-      body: post.body,
+      body: comment.body,
     });
   }
 
@@ -41,9 +39,11 @@ class EditPost extends React.Component {
       confirmLoading: true,
     });
 
-    const { title, body } = this.state;
-    const { post } = this.props;
-    this.props.editPost(post.id, title, body, () => {
+    const { body } = this.state;
+    const timestamp = Date.now();
+    const { id } = this.props.comment;
+
+    this.props.editComment(id, timestamp, body, () => {
       this.setState({
         visible: false,
         confirmLoading: false,
@@ -60,9 +60,7 @@ class EditPost extends React.Component {
   };
 
   render() {
-    const {
-      visible, confirmLoading, title, body,
-    } = this.state;
+    const { visible, confirmLoading, body } = this.state;
     return (
       <Modal
         title="Edit The Post"
@@ -74,20 +72,12 @@ class EditPost extends React.Component {
         onCancel={this.handleCancel}
       >
         <Form>
-          <Form.Item label="Title" hasFeedback>
-            <Input
-              value={title}
-              name="title"
-              placeholder="Post Title"
-              onChange={this.handleInputChange}
-            />
-          </Form.Item>
-          <Form.Item label="Body" hasFeedback>
+          <Form.Item label="Content">
             <Input.TextArea
               value={body}
-              name="body"
               rows={8}
-              placeholder="Post Content"
+              placeholder="Comment Content"
+              name="body"
               onChange={this.handleInputChange}
             />
           </Form.Item>
@@ -97,4 +87,4 @@ class EditPost extends React.Component {
   }
 }
 
-export default EditPost;
+export default EditComment;
