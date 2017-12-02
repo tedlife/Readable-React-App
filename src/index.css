@@ -92,10 +92,11 @@
 }
 
 .comment-list {
-    margin: 20px 0;
+    margin-top: 20px;
 }
 
 .comment-item {
+    margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
 }

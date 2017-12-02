@@ -1,29 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Layout, Menu } from 'antd';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 
+@connect((state) => {
+  const { categories } = state.categories;
+  return categories ? { categories } : { categories: [] };
+})
 class Sider extends React.Component {
-  constructor() {
-    super();
-    this.state = '';
-  }
+  static propTypes = {
+    categories: propTypes.array.isRequired,
+    currentCategory: propTypes.string.isRequired,
+  };
+
   render() {
+    const { categories, currentCategory } = this.props;
     return (
       <Layout.Sider>
-        <Menu defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">
+        <Menu selectedKeys={[currentCategory]}>
+          <Menu.Item key="all">
             <Link to="/">All</Link>
           </Menu.Item>
-          <Menu.Item key="2">
-            <Link to="/categary/React">React</Link>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Link to="/categary/Redux">Redux</Link>
-          </Menu.Item>
-          <Menu.Item key="4">
-            <Link to="/categary/Udacity">Udacity</Link>
-          </Menu.Item>
+          {categories.map(category => (
+            <Menu.Item key={category.name}>
+              <Link to={`/category/${category.name}`}>{category.name}</Link>
+            </Menu.Item>
+          ))}
         </Menu>
       </Layout.Sider>
     );

@@ -4,10 +4,9 @@ import { Layout } from 'antd';
 
 import SiteHeader from './common/Header';
 import SiteFooter from './common/Footer';
-
+import AddPost from './common/AddPost';
 import SiteAticleList from './ArticleList';
 import ArticleDetail from './ArticleDetail';
-import AddPost from './AddPost';
 
 function App() {
   return (
@@ -16,9 +15,9 @@ function App() {
       <Layout.Content>
         <Switch>
           <Route path="/" exact component={SiteAticleList} />
-          <Route path="/categary/:categary" exact component={SiteAticleList} />
+          <Route path="/category/:category" exact component={SiteAticleList} />
           <Route path="/addpost" exact component={AddPost} />
-          <Route path="/:id" exact component={ArticleDetail} />
+          <Route path="/:category/:id" exact component={ArticleDetail} />
         </Switch>
       </Layout.Content>
       <SiteFooter />

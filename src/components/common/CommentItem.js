@@ -1,18 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'antd';
+import propTypes from 'prop-types';
 
+import timestampToDate from '../../utils/timestamp';
+
+@connect()
 class CommentItem extends React.Component {
-  constructor() {
-    super();
-    this.state = '';
-  }
+  static propTypes = {
+    comment: propTypes.object.isRequired,
+  };
+
   render() {
+    const { comment } = this.props;
     return (
       <li className="comment-item">
         <div className="comment-body">
           <div className="comment-meta">
-            <span className="comment-author">ted</span>
-            <span className="comment-metadata">2016-09-28</span>
+            <span className="comment-author">{comment.author}</span>
+            <span className="comment-metadata">{timestampToDate(comment.timestamp)}</span>
             <span className="comment-metadata">
               <Button.Group>
                 <Button type="primary" icon="edit" size="small" ghost />
@@ -20,12 +26,10 @@ class CommentItem extends React.Component {
               </Button.Group>
             </span>
           </div>
-          <div className="comment-content">
-            <p>Hello World</p>
-          </div>
+          <div className="comment-content">{comment.body}</div>
           <div className="comment-vote">
             <Button type="primary" icon="like" size="small" ghost />
-            <span>2</span>
+            <span>{comment.voteScore}</span>
             <Button type="primary" icon="dislike" size="small" ghost />
           </div>
         </div>

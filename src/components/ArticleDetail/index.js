@@ -5,22 +5,37 @@ import propTypes from 'prop-types';
 import Article from '../common/Article';
 import ArticleComment from '../ArticleComment';
 
-@connect()
+import { getPost, getCommentsInPost } from '../../actions';
+
+@connect(
+  (state) => {
+    const { post } = state.posts;
+    return {
+      post: { ...post },
+    };
+  },
+  { getPost, getCommentsInPost },
+)
 class ArticleDetail extends React.Component {
   static propTypes = {
     match: propTypes.object.isRequired,
+    getPost: propTypes.func.isRequired,
+    getCommentsInPost: propTypes.func.isRequired,
+    post: propTypes.object.isRequired,
+    history: propTypes.object.isRequired,
   };
 
-  constructor() {
-    super();
-    this.state = '';
+  componentDidMount() {
+    this.props.getPost(this.props.match.params.id);
+    this.props.getCommentsInPost(this.props.match.params.id);
   }
 
   render() {
+    const { post, history } = this.props;
     const { path } = this.props.match;
     return (
       <div className="article-detail">
-        <Article path={path} />
+        <Article post={post} history={history} path={path} />
         <ArticleComment />
       </div>
     );
