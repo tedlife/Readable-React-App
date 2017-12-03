@@ -63,7 +63,7 @@ class EditComment extends React.Component {
     const { visible, confirmLoading, body } = this.state;
     return (
       <Modal
-        title="Edit The Post"
+        title="Edit The Comment"
         okText="Confirm"
         cancelText="Cancel"
         visible={visible}
