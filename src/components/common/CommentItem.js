@@ -46,6 +46,7 @@ class CommentItem extends React.Component {
   render() {
     const { comment } = this.props;
     const { visible } = this.state;
+
     return (
       <li className="comment-item">
         <div className="comment-body">

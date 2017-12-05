@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 
-import { addComment } from '../../actions';
+import { addComment, getPost } from '../../actions';
 
 @connect(
   (state) => {
@@ -13,13 +13,14 @@ import { addComment } from '../../actions';
       post: posts.post || {},
     };
   },
-  { addComment },
+  { addComment, getPost },
 )
 class CommentForm extends React.Component {
   static propTypes = {
     addComment: propTypes.func.isRequired,
     form: propTypes.object.isRequired,
     post: propTypes.object.isRequired,
+    getPost: propTypes.func.isRequired,
   };
 
   state = {
@@ -42,7 +43,9 @@ class CommentForm extends React.Component {
         const timestamp = Date.now();
         const id = uuidv4();
         const parentId = this.props.post.id;
-        this.props.addComment(id, timestamp, body, author, parentId);
+        this.props.addComment(id, timestamp, body, author, parentId, () => {
+          this.props.getPost(parentId);
+        });
       }
     });
   };

@@ -17,7 +17,7 @@ export function getCommentsInPost(postId) {
   };
 }
 
-export function addComment(id, timestamp, body, author, parentId) {
+export function addComment(id, timestamp, body, author, parentId, callback) {
   const request = ReadableAPI.addComment({
     id,
     timestamp,
@@ -28,6 +28,7 @@ export function addComment(id, timestamp, body, author, parentId) {
   return (dispatch) => {
     request.then((data) => {
       dispatch({ type: ADD_COMMENT, payload: data });
+      callback();
     });
   };
 }

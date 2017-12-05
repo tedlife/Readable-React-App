@@ -4,7 +4,8 @@ import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import Article from '../common/Article';
-import ArticleComment from '../ArticleComment';
+import CommentList from '../CommentList';
+import CommentForm from '../common/CommentForm';
 
 import { getPost, getCommentsInPost } from '../../actions';
 
@@ -40,7 +41,11 @@ class ArticleDetail extends React.Component {
     return (
       <div className="article-detail">
         <Article post={post} history={history} path={path} />
-        <ArticleComment />
+        <div className="article-comment">
+          <h2>Comments</h2>
+          <CommentList />
+          <CommentForm />
+        </div>
       </div>
     );
   }
