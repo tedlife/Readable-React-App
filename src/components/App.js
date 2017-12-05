@@ -5,7 +5,7 @@ import { Layout } from 'antd';
 import SiteHeader from './common/Header';
 import SiteFooter from './common/Footer';
 import AddPost from './common/AddPost';
-import NotFound from './common/404';
+import NotFound from './common/NotFound';
 import SiteAticleList from './ArticleList';
 import ArticleDetail from './ArticleDetail';
 
