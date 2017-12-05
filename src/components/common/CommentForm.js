@@ -44,6 +44,7 @@ class CommentForm extends React.Component {
         const id = uuidv4();
         const parentId = this.props.post.id;
         this.props.addComment(id, timestamp, body, author, parentId, () => {
+          this.props.form.resetFields(['author', 'body']);
           this.props.getPost(parentId);
         });
       }
