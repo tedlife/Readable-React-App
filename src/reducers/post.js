@@ -16,9 +16,15 @@ export default function posts(state = {}, action) {
         [action.payload.id]: action.payload,
       };
     case GET_POST:
-      return {
-        post: action.payload,
-      };
+      return !action.payload.id
+        ? {
+          post: {
+            error: 'The post not found.',
+          },
+        }
+        : {
+          post: action.payload,
+        };
     case VOTE_POST:
       return action.path === '/:category/:id'
         ? {

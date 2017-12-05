@@ -134,3 +134,17 @@
 .manage {
     margin-top: 20px;
 }
+
+/* page 404 */
+.page-404 {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.page-404 h2 {
+    font-size: 24px;
+}
+
+.page-404 p {
+    font-size: 16px;
+}

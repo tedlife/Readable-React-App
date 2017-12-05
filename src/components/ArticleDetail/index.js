@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import Article from '../common/Article';
 import ArticleComment from '../ArticleComment';
@@ -26,13 +27,16 @@ class ArticleDetail extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getPost(this.props.match.params.id);
-    this.props.getCommentsInPost(this.props.match.params.id);
+    const { id } = this.props.match.params;
+    this.props.getPost(id);
+    this.props.getCommentsInPost(id);
   }
 
   render() {
     const { post, history } = this.props;
     const { path } = this.props.match;
+
+    if (post.error) return <Redirect from="*" to="/404" />;
     return (
       <div className="article-detail">
         <Article post={post} history={history} path={path} />
