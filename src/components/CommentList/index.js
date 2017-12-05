@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { Radio } from 'antd';
-import sortBy from 'sort-by';
 
+import arrSort from '../../utils/arrSort';
 import CommentItem from '../common/CommentItem';
+import Sort from '../common/Sort';
 
 @connect((state) => {
   const { comments } = state;
@@ -34,23 +34,11 @@ class CommentList extends React.Component {
     const { sort } = this.state;
     const { comments } = this.props;
 
-    if (sort === 'latest') {
-      comments.sort(sortBy('-timestamp', '-voteScore'));
-    } else if (sort === 'votes') {
-      comments.sort(sortBy('-voteScore', '-timestamp'));
-    } else if (sort === 'oldest') {
-      comments.sort(sortBy('timestamp', '-voteScore'));
-    }
+    arrSort(comments, sort);
+
     return (
       <div>
-        <div className="sort">
-          <span>Sort by: </span>
-          <Radio.Group value={sort} onChange={this.handleSortChange}>
-            <Radio.Button value="latest">Latest</Radio.Button>
-            <Radio.Button value="votes">Votes</Radio.Button>
-            <Radio.Button value="oldest">Oldest</Radio.Button>
-          </Radio.Group>
-        </div>
+        <Sort sort={sort} handleSortChange={this.handleSortChange} />
         <ol className="comment-list">
           {comments.map(comment => <CommentItem key={comment.id} comment={comment} />)}
         </ol>

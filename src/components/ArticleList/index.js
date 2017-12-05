@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout, Radio } from 'antd';
+import { Layout } from 'antd';
 import propTypes from 'prop-types';
-import sortBy from 'sort-by';
 
+import arrSort from '../../utils/arrSort';
 import Article from '../common/Article';
 import Sider from '../common/Sider';
+import Sort from '../common/Sort';
 
 import { getPosts, getCategories, getPostsInCategory } from '../../actions';
 
@@ -66,26 +67,13 @@ class SiteAticleList extends React.Component {
       allPosts = this.props.posts;
     }
 
-    if (sort === 'latest') {
-      allPosts.sort(sortBy('-timestamp', '-voteScore'));
-    } else if (sort === 'votes') {
-      allPosts.sort(sortBy('-voteScore', '-timestamp'));
-    } else if (sort === 'oldest') {
-      allPosts.sort(sortBy('timestamp', '-voteScore'));
-    }
+    arrSort(allPosts, sort);
 
     return (
       <Layout>
         <Sider currentCategory={currentCategory} />
         <Layout.Content>
-          <div className="sort">
-            <span>Sort by: </span>
-            <Radio.Group value={sort} onChange={this.handleSortChange}>
-              <Radio.Button value="latest">Latest</Radio.Button>
-              <Radio.Button value="votes">Votes</Radio.Button>
-              <Radio.Button value="oldest">Oldest</Radio.Button>
-            </Radio.Group>
-          </div>
+          <Sort sort={sort} handleSortChange={this.handleSortChange} />
           <div className="articles">
             {allPosts.map(post => (
               <Article key={post.id} post={post} history={history} path={path} />
