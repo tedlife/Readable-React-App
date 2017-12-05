@@ -88,6 +88,7 @@
 
 /* Comment */
 .article-comment {
+    position: relative;
     margin-top: 30px;
 }
 
@@ -128,6 +129,12 @@
 
 .comment-vote span {
     padding: 0 10px;
+}
+
+.article-comment .sort {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 /* Delete or Edit Manage*/
